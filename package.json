@@ -26,14 +26,14 @@
 		"react-dom": "^16.6.3",
 		"react-image-lightbox": "^5.1.0",
 		"styled-components": "^4.1.2",
-		"styled-reset": "^1.6.2"
-	},
-	"devDependencies": {
-		"babel-eslint": "^10.0.1",
+		"styled-reset": "^1.6.2",
 		"babel-plugin-inline-react-svg": "^1.0.1",
 		"babel-plugin-module-resolver": "^3.1.1",
 		"babel-plugin-polished": "^1.1.0",
-		"babel-plugin-styled-components": "^1.9.3",
+		"babel-plugin-styled-components": "^1.9.3"
+	},
+	"devDependencies": {
+		"babel-eslint": "^10.0.1",
 		"eslint": "^5.10.0",
 		"eslint-config-airbnb": "^17.1.0",
 		"eslint-config-prettier": "^3.3.0",
