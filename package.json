@@ -17,7 +17,12 @@
 		"deploy": "git push origin master && git push web master"
 	},
 	"dependencies": {
+		"babel-plugin-inline-react-svg": "^1.0.1",
+		"babel-plugin-module-resolver": "^3.1.1",
+		"babel-plugin-polished": "^1.1.0",
+		"babel-plugin-styled-components": "^1.9.3",
 		"isomorphic-unfetch": "^3.0.0",
+		"mobile-detect": "^1.4.3",
 		"next": "^7.0.2",
 		"next-images": "^1.0.3",
 		"polished": "^2.3.1",
@@ -25,12 +30,10 @@
 		"react": "^16.6.3",
 		"react-dom": "^16.6.3",
 		"react-image-lightbox": "^5.1.0",
+		"react-player": "^1.7.1",
+		"react-unity-webgl": "^7.0.7",
 		"styled-components": "^4.1.2",
-		"styled-reset": "^1.6.2",
-		"babel-plugin-inline-react-svg": "^1.0.1",
-		"babel-plugin-module-resolver": "^3.1.1",
-		"babel-plugin-polished": "^1.1.0",
-		"babel-plugin-styled-components": "^1.9.3"
+		"styled-reset": "^1.6.2"
 	},
 	"devDependencies": {
 		"babel-eslint": "^10.0.1",

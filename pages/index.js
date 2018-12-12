@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 import Page from 'components/Page';
 import Header from 'components/Header';
+import Video from 'components/Video';
 import Screenshots from 'components/Screenshots';
 import Social from 'components/Social';
 import Community from 'components/Community';
@@ -56,6 +57,7 @@ const Index = () => (
 					action-puzzles.
 				</p>
 			</Description>
+			<Video />
 			<Screenshots
 				images={[
 					{ preview: preview1, full: full1 },
