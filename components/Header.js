@@ -6,7 +6,7 @@ import Head from 'next/head';
 
 import logo from 'assets/logo.png';
 import world from 'assets/world.png';
-import preorder from 'assets/preorder.png';
+import appstore from 'assets/appstore.png';
 
 const Logo = styled.img`
 	width: 326px;
@@ -264,8 +264,8 @@ class Header extends React.Component {
 					<BottomWrap>
 						<AppStoreLink
 							href="https://itunes.apple.com/us/app/conduct-ar/id1414444873?ls=1&mt=8&at=1010lwVg&ct=flythis-site"
-							alt="Pre-order on the App Store">
-							<img src={preorder} alt="Pre-order" />
+							alt="Buy it on the App Store">
+							<img src={appstore} alt="App Store" />
 						</AppStoreLink>
 					</BottomWrap>
 				</Content>

@@ -13,8 +13,11 @@ const Container = styled.div`
 const Page = ({ title, children }) => (
 	<Container>
 		<Head>
-			<meta name="viewport" content="width=device-width, initial-scale=1" />
 			<meta charSet="utf-8" />
+			<meta httpEquiv="x-ua-compatible" content="ie=edge" />
+			<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+			<link rel="manifest" href="/static/site.webmanifest" />
+			<link rel="apple-touch-icon" href="/static/apple-touch-icon.png" />
 			<title>{title}</title>
 		</Head>
 		{children}

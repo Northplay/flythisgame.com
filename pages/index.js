@@ -1,4 +1,5 @@
 import React from 'react';
+import Head from 'next/head';
 import styled from 'styled-components';
 
 import Page from 'components/Page';
@@ -44,6 +45,9 @@ const Description = styled.div`
 
 const Index = () => (
 	<Page title="Fly THIS!">
+		{/* <Head>
+			<
+		</Head> */}
 		<Header />
 		<Content>
 			<Description>
