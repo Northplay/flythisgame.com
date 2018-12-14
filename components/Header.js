@@ -2,11 +2,13 @@ import React from 'react';
 import Unity, { UnityContent } from 'react-unity-webgl';
 import MobileDetect from 'mobile-detect';
 import styled from 'styled-components';
-import Head from 'next/head';
 
+import { appStoreLink, playStoreLink } from 'lib/links';
 import logo from 'assets/logo.png';
 import world from 'assets/world.png';
 import appstore from 'assets/appstore.png';
+import playstore from 'assets/playstore.png';
+import firstframe from 'assets/firstframe.png';
 
 const Logo = styled.img`
 	width: 326px;
@@ -19,6 +21,11 @@ const GameWrap = styled.div`
 	position: absolute;
 	top: 115px;
 	left: 50%;
+	z-index: ${p => (p.isPlayingDemo ? '700' : '100')};
+
+	@media (max-width: 400px) {
+		display: none;
+	}
 `;
 
 const Loading = styled.div`
@@ -85,25 +92,53 @@ const GameContainer = styled.div`
 	}
 `;
 
+const containerAnimationState = (isMobile, isPlayingDemo) => {
+	if (isMobile) {
+		return 'unset';
+	}
+
+	return isPlayingDemo ? 'running' : 'paused';
+};
+
 const Container = styled.div`
 	--animation-duration: 0.25s;
-	--animation-play-state: ${p => (p.isPlayingDemo ? 'running' : 'paused')};
+	--animation-play-state: ${p => containerAnimationState(p.isMobile, p.isPlayingDemo)};
 
-	animation: worldOut ease-in var(--animation-duration) 1 forwards var(--animation-play-state);
-	background-image: url(${world});
+	animation: ${p =>
+		p.isMobile
+			? 'worldOut ease-in var(--animation-duration) 1 forwards var(--animation-play-state)'
+			: 'none'};
+	background-image: ${p => (!p.isMobile ? `url(${firstframe})` : `url(${world})`)};
 	background-repeat: no-repeat;
-	bakground-size: 1219px 898px;
+	background-position: top center;
+	background-size: ${p => (!p.isMobile ? `cover` : `contain`)};
 	flex: 1 0 898px;
-	height: 898px;
+	height: 1000px;
+	margin-top: -20px;
 	position: relative;
 	width: 100%;
 
+	@media (max-width: 768px) {
+		height: auto;
+		flex-basis: 700px;
+	}
+
+	@media (max-width: 420px) {
+		margin-top: auto;
+		flex-basis: 480px;
+		background-image: none;
+	}
+
+	video {
+		display: ${p => (p.isMobile ? 'none' : 'block')};
+	}
+
 	@keyframes worldOut {
 		0% {
-			background-position: center top;
+			background-image: url(${firstframe});
 		}
 		100% {
-			background-position: center -1000px;
+			background-image: unset;
 		}
 	}
 
@@ -130,6 +165,21 @@ const Container = styled.div`
 	}
 `;
 
+const HeaderVideoContainer = styled.div`
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 5;
+	pointer-events: none;
+
+	video {
+		transition: opacity 0.25s ease-in-out;
+		opacity: 0;
+	}
+`;
+
 const Content = styled.div`
 	max-width: ${p => p.theme.site.width};
 	margin: 0 auto;
@@ -138,6 +188,8 @@ const Content = styled.div`
 	justify-content: center;
 	align-items: center;
 	height: 100%;
+	position: relative;
+	z-index: 500;
 `;
 
 const PlayTrailer = styled.button`
@@ -150,6 +202,8 @@ const PlayTrailer = styled.button`
 	font-size: ${p => p.theme.font.size.regular};
 	margin-top: 10px;
 	transition: 0.15s ease;
+	position: relative;
+	z-index: 550;
 
 	&:hover {
 		color: #fff;
@@ -171,21 +225,47 @@ const BottomWrap = styled.div`
 	justify-content: flex-end;
 `;
 
+const StoreLinks = styled.div`
+	display: flex;
+	margin-bottom: 120px;
+
+	@media (max-width: 768px) {
+		margin-bottom: 0;
+	}
+
+	@media (max-width: 420px) {
+		align-items: center;
+		flex-direction: column;
+		justify-content: center;
+		margin-top: 50px;
+
+		a {
+			margin: 5px 0 !important;
+		}
+	}
+
+	a {
+		margin: 0 10px;
+		transition: all 0.15s ease-in-out;
+	}
+
+	a:hover {
+		transform: scale(1.08, 1.08);
+	}
+`;
+
 const AppStoreLink = styled.a`
 	img {
 		width: 240px;
 		height: 80px;
 	}
-	margin-bottom: 65px;
 `;
 
-const Preload = styled.img`
-	opacity: 0;
-	width: 1px;
-	height: 1px;
-	position: absolute;
-	left: -10000px;
-	top: -10000px;
+const PlayStoreLink = styled.a`
+	img {
+		width: 270px;
+		height: 80px;
+	}
 `;
 
 class Header extends React.Component {
@@ -196,12 +276,14 @@ class Header extends React.Component {
 	constructor(props) {
 		super(props);
 
-		this.state = { isPlayingDemo: false, isGameLoading: false, hasWebGL: false };
+		this.state = { isPlayingDemo: false, isGameLoading: false, hasWebGL: false, isMobile: false };
 		this.startGame = this.startGame.bind(this);
+		this.playHeaderLoop = this.playHeaderLoop.bind(this);
 		this.unityContent = new UnityContent(
 			'static/Web/Build/Web.json',
 			'static/Web/Build/UnityLoader.js',
 		);
+		this.videoRef = React.createRef();
 	}
 
 	componentDidMount() {
@@ -213,28 +295,62 @@ class Header extends React.Component {
 		if (md.mobile() === null && Header.hasWebGL()) {
 			this.setState({ hasWebGL: true });
 		}
+
+		if (md.mobile() !== null) {
+			this.setState({ isMobile: true });
+		}
+
+		this.videoRef.addEventListener('canplay', this.playHeaderLoop);
+	}
+
+	componentWillUnmount() {
+		this.videoRef.addEventListener('canplay', this.playHeaderLoop);
 	}
 
 	startGame() {
-		const { isPlayingDemo } = this.state;
-		if (isPlayingDemo) {
+		const { isPlayingDemo, isMobile } = this.state;
+		if (isPlayingDemo || isMobile) {
 			return;
 		}
+
+		this.videoRef.style.opacity = 0;
+		this.videoRef.pause();
 
 		this.setState({ isPlayingDemo: true, isGameLoading: true });
 	}
 
+	playHeaderLoop() {
+		const { isMobile } = this.state;
+		if (isMobile) {
+			return;
+		}
+
+		setTimeout(() => {
+			this.videoRef.style.opacity = 1;
+			setTimeout(() => {
+				this.videoRef.play();
+			}, 100);
+		}, 100);
+	}
+
 	render() {
-		const { isPlayingDemo, isGameLoading, hasWebGL } = this.state;
+		const { isPlayingDemo, isGameLoading, hasWebGL, isMobile } = this.state;
 
 		return (
-			<Container isPlayingDemo={isPlayingDemo}>
-				<Head>
-					<link rel="preload" href="/static/Web/Build/Web.asm.code.unityweb" />
-					<link rel="preload" href="/static/Web/Build/Web.asm.framework.unityweb" />
-				</Head>
+			<Container isPlayingDemo={isPlayingDemo} isMobile={isMobile}>
+				<HeaderVideoContainer>
+					<video
+						ref={el => (this.videoRef = el)}
+						playsInline
+						muted
+						loop
+						id="header_loop"
+						onPlay={this.onHeaderLoopPlay}>
+						<source src="/static/headerloop.mp4" type="video/mp4" />
+					</video>
+				</HeaderVideoContainer>
 				{hasWebGL && (
-					<GameWrap>
+					<GameWrap isPlayingDemo={isPlayingDemo}>
 						<GameContainer id="gameContainer">
 							<Loading isLoading={isGameLoading}>
 								<div className="lds-ring">
@@ -262,11 +378,14 @@ class Header extends React.Component {
 						)}
 					</CenterWrap>
 					<BottomWrap>
-						<AppStoreLink
-							href="https://itunes.apple.com/us/app/conduct-ar/id1414444873?ls=1&mt=8&at=1010lwVg&ct=flythis-site"
-							alt="Buy it on the App Store">
-							<img src={appstore} alt="App Store" />
-						</AppStoreLink>
+						<StoreLinks>
+							<AppStoreLink href={appStoreLink} alt="Downloadon the App Store">
+								<img src={appstore} alt="App Store" />
+							</AppStoreLink>
+							<PlayStoreLink href={playStoreLink} alt="Get it on Google Play">
+								<img src={playstore} alt="Play Store" />
+							</PlayStoreLink>
+						</StoreLinks>
 					</BottomWrap>
 				</Content>
 			</Container>

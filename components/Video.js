@@ -8,6 +8,10 @@ const VideoContainer = styled.div`
 	padding-bottom: 56.25%;
 	padding-top: 30px;
 	position: relative;
+
+	@media (max-width: 768px) {
+		margin: 0 10px;
+	}
 `;
 
 const VideoEmbed = styled(ReactPlayer)`

@@ -7,6 +7,10 @@ const Wrapper = styled.div`
 	padding: 40px;
 	z-index: 20;
 	position: relative;
+
+	@media (max-width: 768px) {
+		margin: 0 10px;
+	}
 `;
 
 const Container = styled.div`
@@ -38,6 +42,10 @@ const Embeds = styled.div`
 	grid-template-columns: 1fr 1fr;
 	grid-gap: 40px;
 	width: 100%;
+
+	@media (max-width: 1080px) {
+		grid-template-columns: 1fr;
+	}
 `;
 
 const Embed = styled.div`
