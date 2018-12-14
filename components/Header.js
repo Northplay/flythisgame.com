@@ -108,7 +108,7 @@ const Container = styled.div`
 		p.isMobile
 			? 'worldOut ease-in var(--animation-duration) 1 forwards var(--animation-play-state)'
 			: 'none'};
-	background-image: ${p => (!p.isMobile ? `url(${firstframe})` : `url(${world})`)};
+	background-image: ${p => (!p.isMobile ? `none` : `url(${world})`)};
 	background-repeat: no-repeat;
 	background-position: top center;
 	background-size: ${p => (!p.isMobile ? `cover` : `contain`)};
@@ -117,6 +117,7 @@ const Container = styled.div`
 	margin-top: -20px;
 	position: relative;
 	width: 100%;
+	overflow: hidden;
 
 	@media (max-width: 768px) {
 		height: auto;
@@ -173,6 +174,9 @@ const HeaderVideoContainer = styled.div`
 	bottom: 0;
 	z-index: 5;
 	pointer-events: none;
+	display: flex;
+	justify-content: center;
+	overflow: hidden;
 
 	video {
 		transition: opacity 0.25s ease-in-out;
@@ -227,7 +231,7 @@ const BottomWrap = styled.div`
 
 const StoreLinks = styled.div`
 	display: flex;
-	margin-bottom: 120px;
+	margin-bottom: 60px;
 
 	@media (max-width: 768px) {
 		margin-bottom: 0;
