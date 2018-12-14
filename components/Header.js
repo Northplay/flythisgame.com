@@ -2,6 +2,7 @@ import React from 'react';
 import Unity, { UnityContent } from 'react-unity-webgl';
 import MobileDetect from 'mobile-detect';
 import styled from 'styled-components';
+import Head from 'next/head';
 
 import logo from 'assets/logo.png';
 import world from 'assets/world.png';
@@ -16,7 +17,7 @@ const GameWrap = styled.div`
 	width: 960px;
 	height: 600px;
 	position: absolute;
-	top: 40px;
+	top: 115px;
 	left: 50%;
 `;
 
@@ -24,8 +25,6 @@ const Loading = styled.div`
 	position: absolute;
 	width: 64px;
 	height: 64px;
-	/* top: -50%; */
-	/* left: -50%; */
 
 	.lds-ring {
 		display: ${p => (p.isLoading ? 'block' : 'none')};
@@ -126,7 +125,6 @@ const Container = styled.div`
 		animation: logoOut ease-in var(--animation-duration) 1 forwards var(--animation-play-state);
 	}
 
-	a,
 	button {
 		animation: logoOut ease-in var(--animation-duration) 1 forwards var(--animation-play-state);
 	}
@@ -181,6 +179,15 @@ const AppStoreLink = styled.a`
 	margin-bottom: 65px;
 `;
 
+const Preload = styled.img`
+	opacity: 0;
+	width: 1px;
+	height: 1px;
+	position: absolute;
+	left: -10000px;
+	top: -10000px;
+`;
+
 class Header extends React.Component {
 	static hasWebGL() {
 		return 'WebGLRenderingContext' in window;
@@ -222,6 +229,10 @@ class Header extends React.Component {
 
 		return (
 			<Container isPlayingDemo={isPlayingDemo}>
+				<Head>
+					<link rel="preload" href="/static/Web/Build/Web.asm.code.unityweb" />
+					<link rel="preload" href="/static/Web/Build/Web.asm.framework.unityweb" />
+				</Head>
 				{hasWebGL && (
 					<GameWrap>
 						<GameContainer id="gameContainer">

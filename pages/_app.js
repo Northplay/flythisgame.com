@@ -2,6 +2,8 @@ import React from 'react';
 import App, { Container } from 'next/app';
 import { ThemeProvider, createGlobalStyle } from 'styled-components';
 import reset from 'styled-reset';
+import Router from 'next/router';
+import withGa from 'next-ga';
 
 import { theme, globals } from '../theme';
 import lightbox from '../lightbox';
@@ -10,10 +12,9 @@ const GlobalStyles = createGlobalStyle`
 	${reset}
 	${globals}
 	${lightbox}
-	${lightbox}
 `;
 
-export default class NewApp extends App {
+class NewApp extends App {
 	static async getInitialProps({ Component, ctx }) {
 		let pageProps = {};
 		if (Component.getInitialProps) {
@@ -35,3 +36,5 @@ export default class NewApp extends App {
 		);
 	}
 }
+
+export default withGa('UA-77461396-9', Router)(NewApp);
