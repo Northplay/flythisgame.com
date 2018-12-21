@@ -126,7 +126,7 @@ const Container = styled.div`
 
 	@media (max-width: 420px) {
 		margin-top: auto;
-		flex-basis: 480px;
+		flex-basis: 520px;
 		background-image: none;
 	}
 
@@ -220,6 +220,11 @@ const CenterWrap = styled.div`
 	justify-content: flex-end;
 	align-items: center;
 	flex-direction: column;
+
+	@media (max-width: 420px) {
+		flex: 1 1 auto;
+		padding-top: 50px;
+	}
 `;
 
 const BottomWrap = styled.div`
@@ -227,6 +232,10 @@ const BottomWrap = styled.div`
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-end;
+
+	@media (max-width: 420px) {
+		flex: 1 1 auto;
+	}
 `;
 
 const StoreLinks = styled.div`
