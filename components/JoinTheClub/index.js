@@ -177,7 +177,7 @@ class JoinTheClub extends React.Component {
 					<Text>
 						<Title>Join the Northplay Club</Title>
 						<Description>
-							It's like an email list for people who like what we do. Sign up and be the first to
+							It&#8216;s like an email list for people who like what we do. Sign up and be the first to
 							know about new things!
 						</Description>
 					</Text>
