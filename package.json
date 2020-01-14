@@ -17,13 +17,13 @@
 		"deploy": "git push origin master && git push web master"
 	},
 	"dependencies": {
-		"babel-plugin-inline-react-svg": "^1.0.1",
+		"babel-plugin-inline-react-svg": "^1.1.0",
 		"babel-plugin-module-resolver": "^3.1.1",
 		"babel-plugin-polished": "^1.1.0",
 		"babel-plugin-styled-components": "^1.9.3",
 		"isomorphic-unfetch": "^3.0.0",
 		"mobile-detect": "^1.4.3",
-		"next": "^7.0.2",
+		"next": "^9.1.7",
 		"next-ga": "^2.3.4",
 		"next-images": "^1.0.3",
 		"polished": "^2.3.1",

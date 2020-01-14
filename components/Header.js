@@ -283,7 +283,7 @@ const PlayStoreLink = styled.a`
 
 class Header extends React.Component {
 	static hasWebGL() {
-		return 'WebGLRenderingContext' in window;
+		return process.browser && 'WebGLRenderingContext' in window;
 	}
 
 	constructor(props) {
@@ -292,10 +292,14 @@ class Header extends React.Component {
 		this.state = { isPlayingDemo: false, isGameLoading: false, hasWebGL: false, isMobile: false };
 		this.startGame = this.startGame.bind(this);
 		this.playHeaderLoop = this.playHeaderLoop.bind(this);
-		this.unityContent = new UnityContent(
-			'static/Web/Build/Web.json',
-			'static/Web/Build/UnityLoader.js',
-		);
+		
+		if (Header.hasWebGL()) {
+			this.unityContent = new UnityContent(
+				'static/Web/Build/Web.json',
+				'static/Web/Build/UnityLoader.js',
+			);
+		}
+		
 		this.videoRef = React.createRef();
 	}
 
