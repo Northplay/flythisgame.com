@@ -10,6 +10,7 @@ import Social from 'components/Social';
 import Community from 'components/Community';
 import JoinTheClub from 'components/JoinTheClub';
 import Northplay from 'components/Northplay';
+import { appStoreLink, playStoreLink } from 'lib/links';
 
 import preview1 from 'assets/screenshot-preview-1.png';
 import preview2 from 'assets/screenshot-preview-2.png';
@@ -45,9 +46,26 @@ const Description = styled.div`
 
 const Index = () => (
 	<Page title="Fly THIS!" backgroundColor="#101b05">
-		{/* <Head>
-			<
-		</Head> */}
+		<Head>
+			<title>Conduct THIS!</title>
+			<meta property="og:image" content="/static/socialshare.png" />
+			<meta property="og:title" content="Conduct THIS!" />
+			<meta property="og:url" content="https://flythisgame.com" />
+			<meta property="og:site_name" content="Fly THIS!" />
+			<meta property="og:type" content="website" />
+			<meta name="twitter:card" content="app" />
+			<meta name="twitter:site" content="@heynorthplay" />
+			<meta
+				name="twitter:description"
+				content="A Game of Explosive Airplane Action That Will Challenge Your Inner Air Traffic Controller"
+			/>
+			<meta name="twitter:app:id:iphone" content="1414444873" />
+			<meta name="twitter:app:url:iphone" content={appStoreLink} />
+			<meta name="twitter:app:id:ipad" content="1414444873" />
+			<meta name="twitter:app:url:iphone" content={appStoreLink} />
+			<meta name="twitter:app:id:googleplay" content="co.northplay.FlyTHIS" />
+			<meta name="twitter:app:url:googleplay" content={playStoreLink} />
+		</Head>
 		<Header />
 		<Content>
 			<Description>

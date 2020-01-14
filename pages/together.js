@@ -1,4 +1,5 @@
 import React from 'react';
+import Head from 'next/head';
 import styled from 'styled-components';
 
 import Page from 'components/Page';
@@ -43,6 +44,20 @@ const Description = styled.div`
 
 const Index = () => (
 	<Page title="Fly TOGETHER!" backgroundColor="#141519">
+		<Head>
+			<title>Conduct TOGETHER!</title>
+			<meta property="og:image" content="/static/socialshare.png" />
+			<meta property="og:title" content="Conduct TOGETHER!" />
+			<meta property="og:url" content="https://flythisgame.com/together" />
+			<meta property="og:site_name" content="Fly TOGETHER!" />
+			<meta property="og:type" content="website" />
+			<meta name="twitter:card" content="app" />
+			<meta name="twitter:site" content="@heynorthplay" />
+			<meta
+				name="twitter:description"
+				content="Get ready to take to the skies in local multiplayer mayhem"
+			/>
+		</Head>
 		<Content>
 			<Video id="DnEmCE4IsBg" />
 			<Description>
