@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import { appStoreLink, playStoreLink } from 'lib/links';
+import Navigation from './Navigation';
 
 const Container = styled.div`
 	width: 100%;
@@ -12,8 +13,8 @@ const Container = styled.div`
 	height: 100vh;
 `;
 
-const Page = ({ title, children }) => (
-	<Container>
+const Page = ({ title, children, backgroundColor }) => (
+	<Container backgroundColor={backgroundColor}>
 		<Head>
 			<meta charSet="utf-8" />
 			<meta httpEquiv="x-ua-compatible" content="ie=edge" />
@@ -61,12 +62,14 @@ const Page = ({ title, children }) => (
 			<meta name="twitter:app:id:googleplay" content="co.northplay.FlyTHIS" />
 			<meta name="twitter:app:url:googleplay" content={playStoreLink} />
 		</Head>
+		<Navigation />
 		{children}
 	</Container>
 );
 
 Page.propTypes = {
 	title: PropTypes.string.isRequired,
+	backgroundColor: PropTypes.string.isRequired,
 };
 
 export default Page;

@@ -45,10 +45,6 @@ export const globals = css`
 		color: #fff;
 		font-size: ${theme.font.size.regular};
 		-webkit-font-smoothing: antialiased;
-		background: linear-gradient(${colors.oceanBlue}, ${colors.skyBlue});
-		background-color: ${colors.skyBlue};
-		background-size: 100% 600px;
-		background-repeat: no-repeat;
 	}
 
 	p {

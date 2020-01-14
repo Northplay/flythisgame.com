@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactPlayer from 'react-player';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 const VideoContainer = styled.div`
 	height: 0;
@@ -22,10 +23,14 @@ const VideoEmbed = styled(ReactPlayer)`
 	width: 100% !important;
 `;
 
-const Video = () => (
+const Video = ({ id }) => (
 	<VideoContainer>
-		<VideoEmbed url="https://www.youtube.com/watch?v=y6vURGqRMdg" controls />
+		<VideoEmbed url={`https://www.youtube.com/watch?v=${id}`} controls />
 	</VideoContainer>
 );
+
+Video.propTypes = {
+	id: PropTypes.string.isRequired,
+};
 
 export default Video;

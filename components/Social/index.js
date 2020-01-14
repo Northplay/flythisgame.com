@@ -82,11 +82,11 @@ const Social = () => (
 			<IconLink icon={<Patreon />} url="https://patreon.com/northplay" text="patreon" />
 			<IconLink icon={<Twitter />} url="https://twitter.com/heynorthplay" text="@heynorthplay" />
 			<IconLink icon={<Facebook />} url="https://facebook.com/northplay" text="/northplay" />
-			<IconLink
-				icon={<Presskit />}
+			{/* <IconLink
+				icon={<`Press`kit />}
 				url="https://www.dropbox.com/sh/b2gnx6img4hazbt/AAC2Lzh6rXEDMfUDOPTLHnmTa?dl=1"
 				text="presskit"
-			/>
+			/> */}
 			<IconLink
 				icon={<Email />}
 				url="mailto:hey@northplay.co?subject=Fly%20THIS"

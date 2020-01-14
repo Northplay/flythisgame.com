@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import bear from './northplay.png';
 
 const Wrapper = styled.div`
-	background-image: linear-gradient(${p => p.theme.colors.skyBlue}, ${p => p.theme.colors.purple});
+	
 	width: 100%;
 	flex-shrink: 0;
 `;
