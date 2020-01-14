@@ -120,15 +120,13 @@ const Container = styled.div`
 `;
 
 const NavigationItem = ({
-  location,
+  isActive,
   path,
   activeImage,
   inactiveImage,
   tagline,
   platforms
-}) => {
-  const isActive = location === path;
-  return (
+}) => (
 	  <Link href={path}>
 		<Item href={path} isActive={isActive}>
 			<Logo image={isActive ? activeImage : inactiveImage} />
@@ -137,7 +135,6 @@ const NavigationItem = ({
 		</Item>
 	</Link>
   );
-};
 
 const List = styled.div`
   display: flex;
@@ -174,7 +171,7 @@ Platforms.propTypes = {
   platforms: PropTypes.arrayOf(PropTypes.string).isRequired
 };
 
-const Navigation = ({ router: { pathname }}) => {
+const Navigation = ({ router: { asPath }}) => {
   const background = {
     "/": { color: "#101b05", image: thisGradient },
     "/this": { color: "#101b05", image: thisGradient },
@@ -182,23 +179,25 @@ const Navigation = ({ router: { pathname }}) => {
   };
 
   return (
-    <Container background={background[pathname]}>
+    <Container background={background[asPath]}>
       <Wrapper>
         <NavigationItem
+          isActive={asPath === '/' || asPath === '/this'}
           path="/this"
           platforms={["ios", "android"]}
           tagline="Mobile Flight Command"
           activeImage={thisActive}
           inactiveImage={thisInactive}
-          location={pathname}
+          location={asPath}
         />
         <NavigationItem
+          isActive={asPath === '/together'}
           path="/together"
           platforms={["switch"]}
           tagline="Local Multiplayer Flight Command"
           activeImage={togetherActive}
           inactiveImage={togetherInactive}
-          location={pathname}
+          location={asPath}
         />
       </Wrapper>
     </Container>
