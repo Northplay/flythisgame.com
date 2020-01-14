@@ -45,7 +45,7 @@ export const globals = css`
 		color: #fff;
 		font-size: ${theme.font.size.regular};
 		-webkit-font-smoothing: antialiased;
-		background-color: rgb(31, 58, 104);
+		background-color: rgb(17, 30, 49);
 	}
 
 	p {

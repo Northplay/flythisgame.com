@@ -8,11 +8,10 @@ const Container = styled.div`
 	width: 100%;
 	display: flex;
 	flex-direction: column;
-	height: 100vh;
 `;
 
-const Page = ({ children }) => (
-	<Container>
+const Page = ({ children, backgroundColor }) => (
+	<Container backgroundColor={backgroundColor}>
 		<Head>
 			<meta charSet="utf-8" />
 			<meta httpEquiv="x-ua-compatible" content="ie=edge" />

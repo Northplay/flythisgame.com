@@ -30,6 +30,10 @@ const Content = styled.div`
 	flex: 1 0 auto;
 `;
 
+const ContentWrap = styled.div`
+	background-color: rgb(31, 59, 105);
+`;
+
 const Description = styled.div`
 	max-width: 645px;
 	margin: 60px auto;
@@ -45,7 +49,7 @@ const Description = styled.div`
 `;
 
 const Index = () => (
-	<Page title="Fly THIS!" backgroundColor="#101b05">
+	<Page>
 		<Head>
 			<title>Conduct THIS!</title>
 			<meta property="og:image" content="/static/socialshare.png" />
@@ -67,6 +71,7 @@ const Index = () => (
 			<meta name="twitter:app:url:googleplay" content={playStoreLink} />
 		</Head>
 		<Header />
+		<ContentWrap>
 		<Content>
 			<Description>
 				<h1>
@@ -94,6 +99,7 @@ const Index = () => (
 			<JoinTheClub />
 		</Content>
 		<Northplay />
+		</ContentWrap>
 	</Page>
 );
 
