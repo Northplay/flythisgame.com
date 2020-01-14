@@ -51,9 +51,9 @@ const Description = styled.div`
 const Index = () => (
 	<Page>
 		<Head>
-			<title>Conduct THIS!</title>
+			<title>Fly THIS!</title>
 			<meta property="og:image" content="/static/socialshare.png" />
-			<meta property="og:title" content="Conduct THIS!" />
+			<meta property="og:title" content="Fly THIS!" />
 			<meta property="og:url" content="https://flythisgame.com" />
 			<meta property="og:site_name" content="Fly THIS!" />
 			<meta property="og:type" content="website" />
