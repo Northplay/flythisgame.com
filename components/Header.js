@@ -240,7 +240,7 @@ const BottomWrap = styled.div`
 
 const StoreLinks = styled.div`
 	display: flex;
-	margin-bottom: 60px;
+	margin-bottom: 160px;
 
 	@media (max-width: 768px) {
 		margin-bottom: 0;
