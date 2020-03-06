@@ -126,7 +126,7 @@ const Container = styled.div`
 
 	@media (max-width: 420px) {
 		margin-top: auto;
-		flex-basis: 520px;
+
 		background-image: none;
 	}
 
@@ -292,14 +292,14 @@ class Header extends React.Component {
 		this.state = { isPlayingDemo: false, isGameLoading: false, hasWebGL: false, isMobile: false };
 		this.startGame = this.startGame.bind(this);
 		this.playHeaderLoop = this.playHeaderLoop.bind(this);
-		
+
 		if (Header.hasWebGL()) {
 			this.unityContent = new UnityContent(
 				'static/Web/Build/Web.json',
 				'static/Web/Build/UnityLoader.js',
 			);
 		}
-		
+
 		this.videoRef = React.createRef();
 	}
 

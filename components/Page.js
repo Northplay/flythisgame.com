@@ -41,7 +41,7 @@ const Page = ({ children, backgroundColor }) => (
 				href="/static/apple-touch-icon-precomposed-57x57.png"
 			/>
 		</Head>
-		<Navigation />
+		{/* <Navigation /> */}
 		{children}
 	</Container>
 );
